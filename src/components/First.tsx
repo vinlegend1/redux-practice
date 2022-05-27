@@ -5,9 +5,9 @@ import { FilterConfirmProps } from "antd/lib/table/interface";
 import React, { useEffect, useRef, useState } from "react";
 import Highlighter from "react-highlight-words";
 import { useSelector, useDispatch } from "react-redux";
-import { storeFetchedData } from "../state/action-creators";
-import { DataIndex, IDataSource } from "../state/actions";
-import { RootState } from "../state/reducers";
+import { DataIndex, IDataSource } from "../actions";
+import { RootState } from "../app/store";
+import { setData } from "../feature";
 import { fetchColumnData } from "../utils/fetch/ColumnData";
 
 const First = () => {
@@ -18,7 +18,7 @@ const First = () => {
 	const searchInput = useRef<InputRef>(null);
 
 	const fetchAsync = async () => {
-		dispatch(storeFetchedData(await fetchColumnData()));
+		dispatch(setData(await fetchColumnData()));
 	};
 	useEffect(() => {
 		fetchAsync();
@@ -143,7 +143,13 @@ const First = () => {
 		},
 	];
 
-	return <Table dataSource={data.dataSource} columns={columns} />;
+	return (
+		<Table
+			dataSource={data.dataSource}
+			columns={columns}
+			title={() => "First"}
+		/>
+	);
 };
 
 export default First;

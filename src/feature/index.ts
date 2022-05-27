@@ -1,44 +1,22 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { IColumnData } from "../actions";
 
-interface Customer {
-	id: string;
-	name: string;
-	food: string[];
-}
-
-interface AddFoodToCustomerPayload {
-	food: string;
-	id: string;
-}
-
-export interface CustomerState {
-	value: Customer[];
-}
-
-const initialState: CustomerState = {
-	value: [],
+const initialState: IColumnData = {
+	columns: [],
+	dataSource: [],
 };
 
-export const customerSlice = createSlice({
+export const dataSlice = createSlice({
 	name: "customer",
 	initialState,
 	reducers: {
-		addCustomer: (state, action: PayloadAction<Customer>) => {
-			state.value.push(action.payload);
-		},
-		addFoodToCustomer: (
-			state,
-			action: PayloadAction<AddFoodToCustomerPayload>
-		) => {
-			state.value.forEach((customer) => {
-				if (customer.id === action.payload.id) {
-					customer.food.push(action.payload.food);
-				}
-			});
+		setData: (state, action: PayloadAction<IColumnData>) => {
+			state.columns = action.payload.columns;
+			state.dataSource = action.payload.dataSource;
 		},
 	},
 });
 
-export const { addCustomer, addFoodToCustomer } = customerSlice.actions;
+export const { setData } = dataSlice.actions;
 
-export default customerSlice.reducer;
+export default dataSlice.reducer;
