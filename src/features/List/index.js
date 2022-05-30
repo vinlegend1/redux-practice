@@ -1,23 +1,23 @@
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef, useState } from "react";
 import { SearchOutlined } from "@ant-design/icons";
 import { Input, Space, Button, Table } from "antd";
-import {useDispatch, useSelector} from "react-redux"
-import {fetchList, selectList} from "./slice"
+import { useDispatch, useSelector } from "react-redux";
+import { fetchList, selectList } from "./slice";
 import Highlighter from "react-highlight-words";
-import Detail from "../Detail/index"
-import {set} from "../Detail/slice"
+import Detail from "../Detail/index";
+import { set } from "../Detail/slice";
 
 const List = () => {
-    const list = useSelector(selectList)
-    const dispatch = useDispatch()
-    const [searchText, setSearchText] = useState("");
+	const list = useSelector(selectList);
+	const dispatch = useDispatch();
+	const [searchText, setSearchText] = useState("");
 	const [searchedColumn, setSearchedColumn] = useState("");
 	const searchInput = useRef(null);
 
-    useEffect(() => {
-        dispatch(fetchList())
-    }, [dispatch])
-    
+	useEffect(() => {
+		dispatch(fetchList());
+	}, [dispatch]);
+
 	const handleSearch = (selectedKeys, confirm, dataIndex) => {
 		confirm();
 		setSearchText(selectedKeys[0]);
@@ -108,16 +108,24 @@ const List = () => {
 					textToHighlight={text ? text.toString() : ""}
 				/>
 			) : (
-                <a onClick={e => {
-                    e.preventDefault()
-                    dispatch(
-                    set({
-                        username: list.list.find(user => user.name === text).username,
-                        name: text,
-                        email: list.list.find(user => user.name === text).email,
-                    })
-                    )
-                }}>{text}</a>
+				<a
+					onClick={(e) => {
+						e.preventDefault();
+						dispatch(
+							set({
+								username: list.list.find(
+									(user) => user.name === text
+								).username,
+								name: text,
+								email: list.list.find(
+									(user) => user.name === text
+								).email,
+							})
+						);
+					}}
+				>
+					{text}
+				</a>
 			),
 	});
 
@@ -134,22 +142,20 @@ const List = () => {
 	];
 
 	return (
-        <div style={{display: "flex"}}>
-		<Table
-			dataSource={list.list}
-			columns={columns}
-            //onRow={(record, rowIndex) => {
-                //return {
-                  //onClick: event => {console.log(event.target)}, // click row
-                //};
-              //}}
-			title={() => "First"}
-		/>
-        {
-            "dfa" !== "" ? <Detail /> : null
-        }
-        </div>
+		<div style={{ display: "flex" }}>
+			<Table
+				dataSource={list.list}
+				columns={columns}
+				//onRow={(record, rowIndex) => {
+				//return {
+				//onClick: event => {console.log(event.target)}, // click row
+				//};
+				//}}
+				title={() => "First"}
+			/>
+			{"dfa" !== "" ? <Detail /> : null}
+		</div>
 	);
-}
+};
 
 export default List;
