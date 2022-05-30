@@ -1,9 +1,8 @@
-import logo from "./logo.svg";
 import "./App.css";
-import List from "./features/List/index";
+import VersionListItem from "./features/VersionListItem/index"
 
 function App() {
-	return <List />;
+	return <VersionListItem />;
 }
 
 export default App;
