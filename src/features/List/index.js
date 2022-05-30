@@ -153,7 +153,7 @@ const List = () => {
 				//}}
 				title={() => "First"}
 			/>
-			{"dfa" !== "" ? <Detail /> : null}
+			<Detail />
 		</div>
 	);
 };
