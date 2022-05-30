@@ -5,13 +5,13 @@ import {useDispatch, useSelector} from "react-redux"
 import {fetchList, selectList} from "./slice"
 import Highlighter from "react-highlight-words";
 import Detail from "../Detail/index"
+import {set} from "../Detail/slice"
 
 const List = () => {
     const list = useSelector(selectList)
     const dispatch = useDispatch()
     const [searchText, setSearchText] = useState("");
 	const [searchedColumn, setSearchedColumn] = useState("");
-	const [user, setUser] = useState({username: "", name: "", email: ""});
 	const searchInput = useRef(null);
 
     useEffect(() => {
@@ -110,11 +110,13 @@ const List = () => {
 			) : (
                 <a onClick={e => {
                     e.preventDefault()
-                    setUser({
+                    dispatch(
+                    set({
                         username: list.list.find(user => user.name === text).username,
                         name: text,
                         email: list.list.find(user => user.name === text).email,
                     })
+                    )
                 }}>{text}</a>
 			),
 	});
@@ -144,7 +146,7 @@ const List = () => {
 			title={() => "First"}
 		/>
         {
-            user.name !== "" ? <Detail username={user.username} name={user.name} email={user.email} /> : null
+            "dfa" !== "" ? <Detail /> : null
         }
         </div>
 	);

@@ -19,6 +19,8 @@ const detailSlice = createSlice({
 })
 
 export const {set} = detailSlice.actions
-export const selectDetail = state => state.detailReducer
+export const selectDetail = state => {
+    return state.detailReducer
+}
 
 export default detailSlice.reducer;
