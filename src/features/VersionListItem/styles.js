@@ -52,6 +52,7 @@ export const Container = styled.div`
 	padding: 8px;
 	border: 1px solid gray;
 	border-radius: 4px;
+	background-color: white;
 
 	@media only screen and (max-width: 790px) {
 		width: auto;

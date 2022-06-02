@@ -10,38 +10,52 @@ import {
 const VersionListItem = () => {
 	return (
 		<Container>
-			<FlexContainer justifyContent="space-between">
-				<p>
-					<b>Version 1.00</b>
-				</p>
-				<p>
-					<b>Created by:</b> Mark (Admin) Sampson
-				</p>
-			</FlexContainer>
 			<GridContainer
-				gridTemplateColumns="1fr 1fr 1fr 1fr"
+				gridTemplateColumns="1fr 1fr"
 				alignItems="center"
 				justifyContent="space-between"
 			>
-				<div>
-					<h2>AAAA</h2>
-					<p
-						style={{
-							textTransform: "uppercase",
-						}}
-					>
-						Administrative, Centre for Educational Research ->
-						Exchange N...
+				<FlexContainer
+					justifyContent="space-between"
+					flexDirection="column"
+				>
+					<p>
+						<b>Version 1.00</b>
 					</p>
-				</div>
-				<p style={{ textAlign: "center" }}>29/05/2022</p>
-				<p>Published</p>
+					<div>
+						<h2>AAAA</h2>
+						<p
+							style={{
+								textTransform: "uppercase",
+							}}
+						>
+							Administrative, Centre for Educational Research ->
+							Exchange N...
+						</p>
+					</div>
+				</FlexContainer>
+				<FlexContainer flexDirection="column" alignItems="end">
+					<p>
+						<b>Created by:</b> Mark (Admin) Sampson
+					</p>
+					<FlexContainer
+						justifyContent="space-between"
+						alignItems="center"
+						style={{ width: "90%" }}
+					>
+						<p style={{ textAlign: "center" }}>29/05/2022</p>
+						<p>Published</p>
 
-				<FlexContainer flexDirection="column" alignItems="stretch">
-					<StyledButton style={{ marginBottom: 8 }}>
-						Recall
-					</StyledButton>
-					<StyledButton color="red">Delete</StyledButton>
+						<FlexContainer
+							flexDirection="column"
+							alignItems="stretch"
+						>
+							<StyledButton style={{ marginBottom: 8 }}>
+								Recall
+							</StyledButton>
+							<StyledButton color="red">Delete</StyledButton>
+						</FlexContainer>
+					</FlexContainer>
 				</FlexContainer>
 			</GridContainer>
 			<FlexContainer alignItems="center">

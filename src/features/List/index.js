@@ -4,11 +4,12 @@ import { Input, Space, Button, Table } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchList, selectList } from "./slice";
 import Highlighter from "react-highlight-words";
-import Detail from "../Detail/index";
 import { set } from "../Detail/slice";
+import { Link, useNavigate } from "react-router-dom";
 
 const List = () => {
 	const list = useSelector(selectList);
+	const navigate = useNavigate();
 	const dispatch = useDispatch();
 	const [searchText, setSearchText] = useState("");
 	const [searchedColumn, setSearchedColumn] = useState("");
@@ -108,24 +109,31 @@ const List = () => {
 					textToHighlight={text ? text.toString() : ""}
 				/>
 			) : (
-				<a
+				<p
 					onClick={(e) => {
 						e.preventDefault();
+						const username = list.list.find(
+							(user) => user.name === text
+						).username;
+						const id = list.list.find(
+							(user) => user.name === text
+						).id;
 						dispatch(
 							set({
-								username: list.list.find(
-									(user) => user.name === text
-								).username,
 								name: text,
+								username,
 								email: list.list.find(
 									(user) => user.name === text
 								).email,
+								id,
 							})
 						);
+						navigate(`/list/${id}`);
 					}}
+					style={{ cursor: "pointer", color: "#62b4cf" }}
 				>
 					{text}
-				</a>
+				</p>
 			),
 	});
 
@@ -142,7 +150,7 @@ const List = () => {
 	];
 
 	return (
-		<div style={{ display: "flex" }}>
+		<div>
 			<Table
 				dataSource={list.list}
 				columns={columns}
@@ -151,9 +159,7 @@ const List = () => {
 				//onClick: event => {console.log(event.target)}, // click row
 				//};
 				//}}
-				title={() => "First"}
 			/>
-			<Detail />
 		</div>
 	);
 };

@@ -4,6 +4,7 @@ const initialState = {
 	username: "",
 	name: "",
 	email: "",
+	id: null,
 };
 
 const detailSlice = createSlice({
@@ -14,6 +15,7 @@ const detailSlice = createSlice({
 			state.username = payload.username;
 			state.name = payload.name;
 			state.email = payload.email;
+			state.id = payload.id;
 		},
 	},
 });
